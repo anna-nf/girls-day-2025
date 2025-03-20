@@ -56,9 +56,11 @@
     isSpicy: Boolean,
   });
   
-  // Funktion zum Laden der Bilder aus "public/images/"
+  // Use the centralized image path helper
   const getImagePath = (imageName) => {
-    return `/images/${imageName}.png`;
+    return process.env.NODE_ENV === 'production'
+      ? `/netfonds-gruppe-girls-day-2025/images/${imageName}.png`
+      : `/images/${imageName}.png`;
   };
   
   // Favoriten-Logik mit dem Store

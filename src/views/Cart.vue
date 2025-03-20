@@ -155,9 +155,7 @@
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import cartStore from '../stores/cartStore';
-
-const router = useRouter();
-const checkoutDialog = ref(false);
+import { getImagePath } from '../data/pizzaData';
 
 // Daten aus dem Cart-Store verwenden
 const { 
@@ -186,11 +184,6 @@ const finishCheckout = () => {
 // Formatierung des Preises für die Anzeige
 const formatPrice = (price) => {
   return `${price.toFixed(2).replace('.', ',')} €`;
-};
-
-// Funktion zum Laden der Bilder aus "public/images/"
-const getImagePath = (imageName) => {
-  return `/images/${imageName}.png`;
 };
 </script>
 

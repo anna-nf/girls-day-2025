@@ -28,7 +28,9 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(process.env.NODE_ENV === 'production' 
+    ? '/netfonds-gruppe-girls-day-2025/' 
+    : '/'),
   routes
 });
 
