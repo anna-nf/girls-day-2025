@@ -1,9 +1,10 @@
-name: Deploy to GitHub Pages
+name: 🚀 Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+    branches:
+      - main  # Falls du von main builden willst
+  workflow_dispatch:  # Manuelles Starten des Workflows
 
 jobs:
   deploy:
@@ -11,29 +12,30 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v3
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v3
       
-      - name: Setup Node.js
+      - name: 🔧 Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
-          
-      - name: Install dependencies
-        run: npm ci
-        
-      - name: List files before build
+          node-version: 22  # ⚠️ Deine lokale Node-Version
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 📂 List files before build
         run: ls -la
-        
-      - name: Build
+
+      - name: 🏗️ Build Project
         run: npm run build
-        
-      - name: List build output
+
+      - name: 📂 List build output
         run: ls -la dist
-        
-      - name: Create .nojekyll file
+
+      - name: ⚙️ Create .nojekyll file
         run: touch dist/.nojekyll
-        
-      - name: Deploy to GitHub Pages
+
+      - name: 🚀 Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist
