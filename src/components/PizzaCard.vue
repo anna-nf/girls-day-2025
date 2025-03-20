@@ -41,6 +41,7 @@
   import { computed } from "vue";
   import { useRouter } from "vue-router";
   import favoriteStore from "../stores/favoriteStore";
+  import { getImagePath } from "../data/pizzaData";
   
   const router = useRouter();
   
@@ -55,12 +56,6 @@
     isVegan: Boolean,
     isSpicy: Boolean,
   });
-  
-  // Use the centralized image path helper
-  const getImagePath = (imageName) => {
-  return `${import.meta.env.BASE_URL}images/${imageName}.png`;
-};
-
   
   // Favoriten-Logik mit dem Store
   const isFavorite = computed(() => favoriteStore.isFavorite(props.id));
