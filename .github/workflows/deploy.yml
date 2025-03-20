@@ -12,15 +12,27 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 16
+          
       - name: Install dependencies
         run: npm ci
+        
+      - name: List files before build
+        run: ls -la
+        
       - name: Build
         run: npm run build
-      - name: Add .nojekyll file
+        
+      - name: List build output
+        run: ls -la dist
+        
+      - name: Create .nojekyll file
         run: touch dist/.nojekyll
+        
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:

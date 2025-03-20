@@ -7,10 +7,18 @@ export default defineConfig({
   base: process.env.NODE_ENV === 'production' 
     ? '/netfonds-gruppe-girls-day-2025/' 
     : '/',
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.esm-bundler.js'
+    }
+  },
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
-    // Force Vite to copy the public directory to dist
-    copyPublicDir: true
+    rollupOptions: {
+      external: [],
+      output: {
+        manualChunks: undefined
+      }
+    }
   }
 })
