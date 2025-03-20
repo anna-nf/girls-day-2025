@@ -13,7 +13,8 @@
             <v-icon icon="mdi-heart" color="red" class="mr-2"></v-icon>
             Meine Lieblingspizzas
           </v-card-title>
-          
+
+          <!-- Keine Favoriten -->
           <v-card-text v-if="favoritePizzas.length === 0" class="text-center pt-6">
             <v-icon icon="mdi-pizza" size="100" color="grey-lighten-1" class="mb-4"></v-icon>
             <p class="text-body-1">Du hast noch keine Lieblingspizzas ausgewählt.</p>
@@ -22,39 +23,42 @@
               Zur Speisekarte
             </v-btn>
           </v-card-text>
-          
+
+          <!-- Liste der Favoriten -->
           <div v-else>
             <v-row class="mt-2">
               <v-col v-for="pizza in favoritePizzas" :key="pizza.id" cols="12" sm="6" md="4">
-                <v-card class="mx-auto" max-width="400" height="100%" @click="navigateToPizzaDetail(pizza.id)">
-                  <div class="d-flex align-center">
-                    <v-img
-                      :src="getImagePath(pizza.imageName)"
-                      :alt="pizza.name"
-                      width="100"
-                      height="100"
-                      cover
-                      class="rounded-lg"
-                    ></v-img>
+                <v-card class="favorite-card mx-auto" max-width="400" height="100%" @click="navigateToPizzaDetail(pizza.id)">
                   
-                    <div class="ml-4">
-                      <v-card-title class="pa-0 text-subtitle-1 font-weight-bold">{{ pizza.name }}</v-card-title>
-                      <v-card-subtitle class="pa-0 pb-1">
-                        <v-icon icon="mdi-star" size="small" color="amber"></v-icon>
-                        {{ pizza.rating }}
-                      </v-card-subtitle>
-                    </div>
-                  
-                    <v-spacer></v-spacer>
-                  
-                    <v-btn
-                      icon="mdi-heart"
-                      color="red"
-                      variant="text"
-                      @click.stop="removeFavorite(pizza.id)"
-                      class="mr-2"
-                    ></v-btn>
+                  <!-- Bild der Pizza -->
+                  <v-img
+                    :src="getImagePath(pizza.imageName)"
+                    :alt="pizza.name"
+                    width="100"
+                    height="100"
+                    class="rounded-lg pizza-img"
+                    contain
+                  ></v-img>
+
+                  <!-- Pizza Infos -->
+                  <div class="ml-4">
+                    <v-card-title class="pa-0 text-subtitle-1 font-weight-bold">{{ pizza.name }}</v-card-title>
+                    <v-card-subtitle class="pa-0 pb-1">
+                      <v-icon icon="mdi-star" size="small" color="amber"></v-icon>
+                      {{ pizza.rating }}
+                    </v-card-subtitle>
                   </div>
+
+                  <v-spacer></v-spacer>
+
+                  <!-- Favoriten-Button -->
+                  <v-btn
+                    icon="mdi-heart"
+                    color="red"
+                    variant="text"
+                    @click.stop="removeFavorite(pizza.id)"
+                    class="mr-2"
+                  ></v-btn>
                 </v-card>
               </v-col>
             </v-row>
@@ -87,13 +91,20 @@ const removeFavorite = (id) => {
   padding-bottom: 80px !important;
 }
 
-.v-card {
+.favorite-card {
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 10px;
 }
 
-.v-card:hover {
+.favorite-card:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
+}
+
+.pizza-img {
+  border-radius: 12px;
 }
 </style>

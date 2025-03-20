@@ -58,10 +58,9 @@
   
   // Use the centralized image path helper
   const getImagePath = (imageName) => {
-    return process.env.NODE_ENV === 'production'
-      ? `/netfonds-gruppe-girls-day-2025/images/${imageName}.png`
-      : `/images/${imageName}.png`;
-  };
+  return `${import.meta.env.BASE_URL}images/${imageName}.png`;
+};
+
   
   // Favoriten-Logik mit dem Store
   const isFavorite = computed(() => favoriteStore.isFavorite(props.id));

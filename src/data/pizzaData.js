@@ -119,11 +119,9 @@ export const getPizzaById = (id) => {
 
 // Helper function to get image path for a pizza
 export const getImagePath = (imageName) => {
-  const basePath = process.env.NODE_ENV === 'production'
-    ? '/netfonds-gruppe-girls-day-2025/'
-    : '/';
-  return `${basePath}images/${imageName}.png`;
+  return `${import.meta.env.BASE_URL}images/${imageName}.png`;
 };
+
 
 // Helper function to format price
 export const formatPrice = (price) => {
