@@ -120,7 +120,7 @@ export const getPizzaById = (id) => {
 // Helper function to get image path for a pizza
 export const getImagePath = (imageName) => {
   const basePath = import.meta.env.PROD 
-    ? '/netfonds-gruppe-girls-day-2025/images/' 
+    ? '/images/' // Simplified path for the new repo deployment
     : '/images/';
   return `${basePath}${imageName}.png`;
 };
