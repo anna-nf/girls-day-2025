@@ -20,7 +20,6 @@
 
     <!-- Wenn Artikel im Warenkorb sind -->
     <template v-else>
-      <!-- Artikel im Warenkorb -->
       <v-row>
         <v-col cols="12" lg="8">
           <v-card class="mb-4">
@@ -125,6 +124,48 @@
     </template>
 
     <!-- Checkout confirmation dialog -->
+    <v-dialog v-model="checkoutDialogOpen" max-width="500px">
+      <v-card>
+        <v-card-title class="text-h5">Bestellung bestätigen</v-card-title>
+        <v-card-text>   
+          <!-- Bestelldetails -->
+          <v-list class="bg-transparent">
+  
+            <v-list-item v-for="(item, index) in cartItems" :key="index" density="compact">
+              <v-list-item-title>
+                {{ item.quantity }}x {{ item.name }} ({{ item.size.name }})
+              </v-list-item-title>
+              <template v-slot:append>
+                {{ formatPrice(getItemTotal(item)) }}
+              </template>
+            </v-list-item>
+          </v-list>
+          
+          <v-divider class="my-3"></v-divider>
+          
+          <div class="d-flex justify-space-between mb-2">
+            <span>Zwischensumme:</span>
+            <span>{{ formatPrice(subtotal) }}</span>
+          </div>
+          <div class="d-flex justify-space-between mb-2">
+            <span>Lieferkosten:</span>
+            <span>{{ formatPrice(deliveryFee) }}</span>
+          </div>
+          <div class="d-flex justify-space-between font-weight-bold mb-4">
+            <span class="text-subtitle-1">Gesamtbetrag:</span>
+            <span class="text-subtitle-1">{{ formatPrice(total) }}</span>
+          </div>
+          
+          <p><strong>Lieferadresse:</strong> {{ deliveryAddress || 'Heidenkampsweg 73' }}</p>
+          <p><strong>Geschätzte Lieferzeit:</strong> {{ estimatedDeliveryTime }} Minuten</p>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="grey" variant="text" @click="checkoutDialogOpen = false">Abbrechen</v-btn>
+          <v-btn color="success" @click="confirmOrder">Bestätigen</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
   </v-container>
 </template>
@@ -133,7 +174,7 @@
 import { useRouter } from 'vue-router';
 import cartStore from '../stores/cartStore';
 import { getImagePath } from '../data/pizzaData';
-
+import { ref } from 'vue';
 
 const router = useRouter();
 
@@ -150,23 +191,48 @@ const {
   clearCart 
 } = cartStore;
 
-// Bestellvorgang abschließen
-const checkout = () => {
-  // Replace direct reference to checkoutDialog with the injected function
-  // Create order details based on items in cart
-  const orderDetails = {
-    deliveryTime: Math.floor(Math.random() * 20) + 25, // Random time between 25-45 min
-    pizzaName: cartItems.value.length > 0 
-      ? cartItems.value.map(item => item.name).join(', ') 
-      : 'Pizza',
-    pizzaSize: cartItems.value.length > 0 
-      ? cartItems.value[0].size.name 
-      : 'Standard',
-    address: 'Ihre Lieferadresse' // You may want to collect this from the user
-  };
+// Dialog-Steuerung
+const checkoutDialogOpen = ref(false);
+const deliveryAddress = ref('');
+const estimatedDeliveryTime = ref(0);
 
+// Aktualisierte Checkout-Funktion, um Dialog zu öffnen
+const checkout = () => {
+  if (cartItems.value.length === 0) {
+    alert('Dein Warenkorb ist leer');
+    return;
+  }
+  
+  // Lieferzeit berechnen (25-45 Minuten)
+  estimatedDeliveryTime.value = Math.floor(Math.random() * 20) + 25;
+  
+  // Öffne den Checkout-Dialog
+  checkoutDialogOpen.value = true;
 };
 
+// Funktion zur Bearbeitung der endgültigen Bestellbestätigung
+const confirmOrder = () => {
+  // Bestelldetails basierend auf Artikeln im Warenkorb erstellen
+  const orderDetails = {
+    deliveryTime: estimatedDeliveryTime.value,
+    pizzaName: cartItems.value.map(item => `${item.quantity}x ${item.name}`).join(', '),
+    pizzaSize: cartItems.value[0].size.name,
+    address: deliveryAddress.value || 'Heidenkampsweg 73',
+    totalAmount: total.value
+  };
+  
+  // Bestelldetails in localStorage oder State-Management speichern, falls nötig
+  localStorage.setItem('lastOrder', JSON.stringify(orderDetails));
+  
+  // Dialog schließen
+  checkoutDialogOpen.value = false;
+  
+  // Warenkorb leeren
+  clearCart();
+  
+  // Zur Startseite navigieren anstatt zur Bestätigungsseite
+  router.push('/');
+};
 
 // Formatierung des Preises für die Anzeige
 const formatPrice = (price) => {

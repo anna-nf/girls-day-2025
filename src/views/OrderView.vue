@@ -36,8 +36,7 @@
 <script setup>
 import { ref, inject } from 'vue';
 
-
-// Pizza options
+// Pizza Optionen
 const pizzaOptions = [
   { title: 'Margherita', ingredients: 'Tomaten, Mozzarella, Basilikum' },
   { title: 'Salami', ingredients: 'Tomaten, Mozzarella, Salami' },
@@ -45,30 +44,28 @@ const pizzaOptions = [
   { title: 'Quattro Formaggi', ingredients: 'Vier verschiedene Käsesorten' }
 ];
 
-// Form data
+// Formulardaten
 const selectedPizza = ref(pizzaOptions[0]);
 const selectedSize = ref('Groß (32cm)');
 const address = ref('');
 
-// Estimated delivery time (random between 25-45 minutes)
+// Geschätzte Lieferzeit (zufällig zwischen 25-45 Minuten)
 const getRandomDeliveryTime = () => Math.floor(Math.random() * 20) + 25;
 
-// Place order function
+// Bestellung aufgeben Funktion
 const placeOrder = () => {
-  // Validate address
+  // Adresse überprüfen
   if (!address.value) {
     alert('Bitte geben Sie Ihre Lieferadresse ein.');
     return;
   }
   
-  // Create order details
+  // Bestellungsdetails erstellen
   const orderDetails = {
     deliveryTime: getRandomDeliveryTime(),
     pizzaName: selectedPizza.value.title,
     pizzaSize: selectedSize.value,
     address: address.value
   };
-  
-
 };
 </script>
