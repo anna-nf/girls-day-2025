@@ -116,12 +116,6 @@
     border-color: #1867c0;
   }
 
-  /* Ensure the bottom navigation is always visible */
-  .v-bottom-navigation {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
 
   /* Add appropriate spacing for footer */
   .v-container {
