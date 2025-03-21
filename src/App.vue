@@ -6,23 +6,6 @@
       <router-view />
     </v-main>
     
-    <v-layout>
-      <v-bottom-navigation
-        v-model="activeTab"
-        layout-item="bottom-navigation"
-      >
-        <!--  navigation items here -->
-        <v-btn value="home">
-          <v-icon>mdi-home</v-icon>
-          Home
-        </v-btn>
-        <v-btn value="about">
-          <v-icon>mdi-information</v-icon>
-          About
-        </v-btn>
-        <!--  buttons  -->
-      </v-bottom-navigation>
-    </v-layout>
     
     <AppFooter />
     

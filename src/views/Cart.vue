@@ -125,37 +125,17 @@
     </template>
 
     <!-- Checkout confirmation dialog -->
-    <v-dialog v-model="checkoutDialog" max-width="500">
-      <v-card>
-        <v-card-title class="text-h5 bg-primary text-white">
-          <v-icon icon="mdi-check-circle" class="mr-2"></v-icon>
-          Bestellung erfolgreich!
-        </v-card-title>
-        
-        <v-card-text class="py-4 text-center">
-          <p class="text-h6 mb-2">Vielen Dank für deine Bestellung!</p>
-          <p>Sie wird in Kürze zubereitet und ist innerhalb von Minuten bei dir.</p>
-        </v-card-text>
-        
-        <v-card-actions class="justify-center pb-4">
-          <v-btn
-            color="primary"
-            variant="elevated"
-            @click="finishCheckout"
-          >
-            Zur Startseite
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+
   </v-container>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
 import cartStore from '../stores/cartStore';
 import { getImagePath } from '../data/pizzaData';
+
+
+const router = useRouter();
 
 // Daten aus dem Cart-Store verwenden
 const { 
@@ -172,14 +152,21 @@ const {
 
 // Bestellvorgang abschließen
 const checkout = () => {
-  checkoutDialog.value = true;
+  // Replace direct reference to checkoutDialog with the injected function
+  // Create order details based on items in cart
+  const orderDetails = {
+    deliveryTime: Math.floor(Math.random() * 20) + 25, // Random time between 25-45 min
+    pizzaName: cartItems.value.length > 0 
+      ? cartItems.value.map(item => item.name).join(', ') 
+      : 'Pizza',
+    pizzaSize: cartItems.value.length > 0 
+      ? cartItems.value[0].size.name 
+      : 'Standard',
+    address: 'Ihre Lieferadresse' // You may want to collect this from the user
+  };
+
 };
 
-const finishCheckout = () => {
-  checkoutDialog.value = false;
-  clearCart(); // Warenkorb leeren
-  router.push('/'); // Zurück zur Startseite
-};
 
 // Formatierung des Preises für die Anzeige
 const formatPrice = (price) => {
