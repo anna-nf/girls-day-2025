@@ -16,7 +16,7 @@ Die Anwendung ist live auf Netlify verfügbar:
 - **Vue 3**: Frontend-Framework mit Composition API
 - **Vuetify**: Material Design Komponentenbibliothek für Vue
 - **Vue Router**: Für clientseitiges Routing
-- **LocalStorage**: Zum Speichern des Warenkorbs und der Benutzereinstellungen
+- **LocalStorage**: Zum Speichern des Warenkorbs
 
 ## ✨ Funktionen
 
@@ -26,6 +26,10 @@ Die Anwendung ist live auf Netlify verfügbar:
 - Bestellübersicht mit Preisberechnung
 - Bestellbestätigung mit geschätzter Lieferzeit
 - Responsive Design für mobile und Desktop-Geräte
+
+## 📝 Für Einsteiger geeignet
+
+Der Quellcode dieses Projekts enthält umfangreiche Kommentare und Dokumentation, die speziell für Programmier-Anfängerinnen konzipiert wurden. Jede wichtige Funktion und jeder Codeblock ist mit hilfreichen Erklärungen versehen, die den Zweck und die Funktionsweise verdeutlichen. Diese ausführliche Dokumentation soll jungen Entwicklerinnen den Einstieg in die Webentwicklung erleichtern und ein besseres Verständnis der Konzepte fördern.
 
 ## 📋 Voraussetzungen
 
