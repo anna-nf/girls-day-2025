@@ -23,8 +23,9 @@ export const availableToppings = [
 // Filter definitions for the home page
 export const pizzaFilters = [
   { text: "Beliebt", icon: "mdi-star-outline", value: "isPopular", iconColor: "amber-darken-2" },
-  { text: "Neu", icon: "mdi-fire", value: "isNew", iconColor: "orange" },
   { text: "Vegan", icon: "mdi-leaf", value: "isVegan", iconColor: "green" },
+  { text: "Neu", icon: "mdi-fire", value: "isNew", iconColor: "orange" },
+
   { text: "Scharf", icon: "mdi-chili-hot", value: "isSpicy", iconColor: "red" },
 ];
 
