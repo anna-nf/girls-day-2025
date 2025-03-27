@@ -1,6 +1,6 @@
 <template>
   <v-row class="mb-4">
-    <v-col v-for="filter in filters" :key="filter.text" cols="6" sm="3">
+    <v-col v-for="filter in filters" :key="filter.text" cols="3">
       <v-btn
         variant="tonal"
         block
@@ -48,6 +48,17 @@ function getBtnStyle(value) {
   background-color: #2cabd8 !important;
   color: white !important;
   border-color: #2cabd8 !important;
+}
+
+/* Add responsive text sizing for small screens */
+@media (max-width: 600px) {
+  .v-btn {
+    font-size: 0.65rem !important;
+  }
+  
+  .v-btn .v-icon {
+    font-size: 1rem !important;
+  }
 }
 </style>
 
