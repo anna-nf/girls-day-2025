@@ -12,7 +12,7 @@
         <v-icon icon="mdi-cart-off" size="100" color="grey-lighten-1" class="mb-4"></v-icon>
         <h2 class="text-h5 mb-4">Dein Warenkorb ist leer</h2>
         <p class="mb-6">Füge köstliche Pizzen hinzu, um deine Bestellung zu starten.</p>
-        <v-btn color="primary" to="/" prepend-icon="mdi-pizza">
+        <v-btn color="#2cabd8" to="/" prepend-icon="mdi-pizza">
           Zurück zur Speisekarte
         </v-btn>
       </v-col>
@@ -69,7 +69,7 @@
                     <v-btn 
                       icon="mdi-delete-outline"
                       variant="text"
-                      color="error"
+                      color="#e12226"
                       density="comfortable"
                       @click="removeItem(index)"
                     ></v-btn>

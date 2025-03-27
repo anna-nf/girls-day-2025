@@ -27,11 +27,10 @@
     </div>
 
     <v-btn 
-      color="primary" 
       size="large" 
       block 
       prepend-icon="mdi-cart" 
-      class="mt-4" 
+      class="mt-4 add-to-cart-button"
       @click="addToCartAndNavigate"
       :loading="isAddingToCart"
     >
@@ -142,5 +141,10 @@ const formatPrice = (price) => {
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   background-color: #f5f5f5;
+}
+
+.add-to-cart-button {
+  background-color: #2cabd8;
+  color: #fff;
 }
 </style>

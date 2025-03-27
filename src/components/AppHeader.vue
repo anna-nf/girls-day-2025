@@ -2,16 +2,13 @@
   <v-app-bar color="white" elevation="1">
     <v-container class="d-flex align-center">
       <router-link to="/" class="text-decoration-none">
-        <div class="d-flex align-center">
-          <v-icon icon="mdi-pizza" color="primary" size="large" class="mr-2"></v-icon>
-          <span class="text-h6 font-weight-bold">Pizza App</span>
-        </div>
+        <img src="/images/girls-app-new.png" alt="App Logo" style="max-height: 100px;" />
       </router-link>
 
       <v-spacer></v-spacer>
       
       <v-btn icon to="/cart" class="ml-2">
-        <v-badge :content="cartItemCount" :model-value="cartItemCount > 0" color="primary" overlap>
+        <v-badge :content="cartItemCount" :model-value="cartItemCount > 0" color="#2cabd8" class="cart-icon" overlap>
           <v-icon>mdi-cart</v-icon>
         </v-badge>
       </v-btn>

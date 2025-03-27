@@ -43,7 +43,7 @@
             <v-icon start>mdi-leaf</v-icon>
             Vegan
           </v-chip>
-          <v-chip v-if="pizza.isSpicy" class="mr-2 mb-2" color="red" text-color="white">
+          <v-chip v-if="pizza.isSpicy" class="mr-2 mb-2" color="#e12226" text-color="white">
             <v-icon start>mdi-chili-hot</v-icon>
             Scharf
           </v-chip>

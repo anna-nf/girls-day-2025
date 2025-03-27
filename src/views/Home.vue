@@ -1,39 +1,16 @@
 <template>
     <v-container class="py-4 mb-16">
 
-      <v-text-field
-        v-model="search"
-        label="Nach Pizzas suchen..."
-        variant="outlined"
-        density="compact"
-        append-inner-icon="mdi-magnify"
-        class="mb-4"
-      ></v-text-field>
-  
-      <v-card class="mb-4 pa-4 text-white offer-card">
-        <h2 class="text-h6 font-weight-bold">Sonderangebot für Pizza!</h2>
-        <p class="text-body-2">Erhalten Sie 20 % Rabatt auf Ihre erste Pizza-Bestellung</p>
+      <SearchField v-model="search" label="Nach Pizzas suchen..." />
 
-      </v-card>
+      <SpecialOfferCard />
 
-      <v-row class="mb-4">
-        <v-col v-for="filter in filters" :key="filter.text" cols="3">
-          <v-btn 
-            variant="outlined" 
-            block 
-            rounded
-            size="small"
-            :class="{ 'active-filter': activeFilters.includes(filter.value) }"
-            @click="toggleFilter(filter.value)"
-          >
-            <v-icon left :color="activeFilters.includes(filter.value) ? 'white' : filter.iconColor">
-              {{ filter.icon }}
-            </v-icon> 
-            {{ filter.text }}
-          </v-btn>
-        </v-col>
-      </v-row>
-  
+      <PizzaFilterBar
+        :filters="filters"
+        :activeFilters="activeFilters"
+        :toggleFilter="toggleFilter"
+      />
+
       <v-row>
         <v-col v-for="(pizza, index) in filteredPizzas" :key="index" cols="12" md="4">
           <PizzaCard
@@ -64,6 +41,9 @@
   import AppFooter from "../components/AppFooter.vue";
   import { pizzas } from "../data/pizzaData.js";
   import { pizzaFilters } from "../data/constants.js";
+  import SearchField from '../components/SearchField.vue';
+  import SpecialOfferCard from '../components/SpecialOfferCard.vue';
+  import PizzaFilterBar from '../components/PizzaFilterBar.vue';
   
   const search = ref("");
   const activeFilters = ref([]);
@@ -104,17 +84,6 @@
   </script>
   
   <style scoped>
-  .offer-card {
-    background-color: #e53935;
-    border-radius: 10px;
-    text-align: center;
-  }
-
-  .active-filter {
-    background-color: #1867c0;
-    color: white;
-    border-color: #1867c0;
-  }
 
 
   /* Add appropriate spacing for footer */
