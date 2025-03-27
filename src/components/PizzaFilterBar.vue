@@ -1,6 +1,6 @@
 <template>
   <v-row class="mb-4">
-    <v-col v-for="filter in filters" :key="filter.text" cols="3">
+    <v-col v-for="filter in filters" :key="filter.text" cols="6" sm="3">
       <v-btn
         variant="tonal"
         block
